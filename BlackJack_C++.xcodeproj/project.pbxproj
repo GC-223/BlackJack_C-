@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		968ECD132A9DA67F00A9C37D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968ECD122A9DA67F00A9C37D /* main.cpp */; };
+		968ECD1A2A9E5C5300A9C37D /* main1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968ECD192A9E5C5300A9C37D /* main1.cpp */; };
+		968ECD1D2A9E6BB100A9C37D /* Functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968ECD1B2A9E6BB100A9C37D /* Functions.cpp */; };
+		968ECD202A9E6C0D00A9C37D /* Classes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 968ECD1E2A9E6C0D00A9C37D /* Classes.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,11 @@
 /* Begin PBXFileReference section */
 		968ECD0F2A9DA67F00A9C37D /* BlackJack_C++ */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "BlackJack_C++"; sourceTree = BUILT_PRODUCTS_DIR; };
 		968ECD122A9DA67F00A9C37D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		968ECD192A9E5C5300A9C37D /* main1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main1.cpp; sourceTree = "<group>"; };
+		968ECD1B2A9E6BB100A9C37D /* Functions.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Functions.cpp; sourceTree = "<group>"; };
+		968ECD1C2A9E6BB100A9C37D /* Functions.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Functions.hpp; sourceTree = "<group>"; };
+		968ECD1E2A9E6C0D00A9C37D /* Classes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Classes.cpp; sourceTree = "<group>"; };
+		968ECD1F2A9E6C0D00A9C37D /* Classes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Classes.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,11 @@
 			isa = PBXGroup;
 			children = (
 				968ECD122A9DA67F00A9C37D /* main.cpp */,
+				968ECD192A9E5C5300A9C37D /* main1.cpp */,
+				968ECD1B2A9E6BB100A9C37D /* Functions.cpp */,
+				968ECD1C2A9E6BB100A9C37D /* Functions.hpp */,
+				968ECD1E2A9E6C0D00A9C37D /* Classes.cpp */,
+				968ECD1F2A9E6C0D00A9C37D /* Classes.hpp */,
 			);
 			path = "BlackJack_C++";
 			sourceTree = "<group>";
@@ -119,6 +132,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				968ECD1D2A9E6BB100A9C37D /* Functions.cpp in Sources */,
+				968ECD1A2A9E5C5300A9C37D /* main1.cpp in Sources */,
+				968ECD202A9E6C0D00A9C37D /* Classes.cpp in Sources */,
 				968ECD132A9DA67F00A9C37D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
