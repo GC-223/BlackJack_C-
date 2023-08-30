@@ -19,82 +19,113 @@
 #include <vector>
 #include "Functions.hpp"
 
+constexpr int g_maxScore { 21 } ;
+constexpr int g_minDealer { 17 } ;
 
-void dealCard( std::vector<Card>& hand , const std::array<Card, 52>& deck )
+struct Player
 {
-    // a variable to keep track of deck index forever
-    static int deckIndex { 0 } ;
+    int score { } ;
+} ;
+
+bool hitOrStand()
+{
+    std::cout << "Hit or Stand (h or s)? " ;
+    char ch { } ;
+    std::cin >> ch ;
     
-    hand.push_back( deck[deckIndex] ) ;
-    ++deckIndex ;
+    return ch == 'h' ;
 }
 
-void newGame( std::vector<Card>& dealer, std::vector<Card>& player, const std::array<Card, 52>& deck)
+// We want this to return true whenever the player goes over
+bool playerTurn( Player& player, const std::array<Card, 52>& deck, int& deckIndex )
 {
-    for ( int i = 0 ; i < 3 ; ++i )
+    
+    // a function to ask if the player wants to hit or stand
+    // we also want to be able to do this forever
+    while ( true )
     {
-        if ( i % 2 == 0 )
+        if ( player.score > 21 )
         {
-            dealCard( player, deck ) ;
+            std::cout << "Bust\n" ;
+            return true ;
         }
         else
         {
-            dealCard( player, deck ) ;
+            if ( hitOrStand() )
+            {
+                player.score += getCardValue( deck.at( deckIndex++ ) ) ;
+                std::cout << "Player Score: " << player.score << '\n' ;
+            }
+            else
+            {
+                return false ;
+            }
         }
     }
 }
 
-// now we need a function to hit or stay
-bool hitStay()
+// We want this to return true whenever the dealer busts
+bool dealerTurn( Player& dealer, const std::array<Card, 52>& deck, int& deckIndex )
 {
-    std::cout << "Enter 1 to hit; Enter 2 to stand\n" ;
-    int input { } ;
-    std::cin >> input ;
+    while ( dealer.score < g_minDealer )
+    {
+        dealer.score += getCardValue( deck.at( deckIndex++ ) ) ;
+        std::cout << "Dealer Score: " << dealer.score << '\n' ;
+    }
     
-    return input == 1 ;
+    if ( dealer.score > g_maxScore )
+    {
+        std::cout << "Bust\n" ;
+        return true ;
+    }
+    
+    return false ;
 }
 
-// a function to 
-
-// we finally need a function to play blackJack
-void playBlackJack ( std::array<Card, 52>& deck )
+bool playBlackJack ( const std::array<Card, 52>& deck )
 {
-    // We are only going to have two players at first
-    std::vector<Card> dealer ;
-    std::vector<Card> player ;
+    // We need our player score
+    Player player { 0 } ;
     
-    // we are going to need a function to deal a card
-    // We need a function for the start of the game
-    newGame( dealer, player, deck ) ;
+    // We need our dealer score
+    Player dealer { 0 } ;
     
-    if ( hitStay() )
+    // we also need a value to track the deck index
+    int deckIndex { 0 } ;
+    
+    // lets give some values to the dealer
+    dealer.score += getCardValue( deck.at(deckIndex++) ) ;
+    std::cout << "Dealer Score: " << dealer.score << '\n' ;
+    
+    // lets give some values to p1
+    player.score += getCardValue( deck.at(deckIndex++) ) ;
+    std::cout << "Player Score: " << player.score << '\n' ;
+    
+    if ( playerTurn( player, deck, deckIndex ) )
     {
-        dealCard( player, deck ) ;
+        return false ;
+    }
+    else if ( dealerTurn( dealer , deck , deckIndex ) )
+    {
+        return true ;
     }
     
-    // now for the dealer
-    if ( hitStay() )
-    {
-        dealCard( dealer, deck ) ;
-    }
-    
+    return player.score > dealer.score ;
 }
 
 int main()
 {
     std::array<Card, 52> deck { newDeck() } ;
-    
-    printDeck( deck ) ;
-    
     shuffleDeck( deck ) ;
     
-    std::cout << "\n\n" ;
-    
-    printDeck( deck ) ;
-    
-    std::cout << "\n\n" ;
-
-    playBlackJack( deck ) ;
+    if( playBlackJack( deck ) )
+    {
+        std::cout << "You Win!\n" ;
+    }
+    else
+    {
+        std::cout << "You lose\n" ;
+    }
     
     return 0;
 }
